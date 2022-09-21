@@ -80,11 +80,11 @@ urlcolor=black    % ...
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 
-% numbering
-\numberwithin{equation}{section}
-\numberwithin{figure}{section}
-\numberwithin{table}{section}
-\numberwithin{theorem}{section}
+%% numbering
+%\numberwithin{equation}{section}
+%\numberwithin{figure}{section}
+%\numberwithin{table}{section}
+%\numberwithin{theorem}{section}
 
 \newcommand{\eps}{\epsilon}
 \newcommand{\RR}{\mathbb{R}}
@@ -166,18 +166,42 @@ Our model problem is a 2D equation with both partial derivatives and integrals, 
 
 For length $L>0$ and height $H>0$ given, let $\Omega = (0,L)^2\times (0,H)$ be the rectangular-solid in 3D.  On $\Omega$ the coordinates are $x,y,z$ with $0<x,y<L$ and $0<z<H$.  We call the $z=0$ boundary the \emph{bottom} and the $z=H$ boundary the \emph{top}.  The remaining boundary parts are the \emph{sides}.  Let $g(x,y)$ be a given function on the top, i.e.~defined for $0<x,y<L$.  We consider the following 3D Laplace equation problem for the scalar solution $u(x,y,z)$ defined on $\Omega$:
 \begin{subequations}
-\label{laplaceproblem}
+\label{eq:laplaceproblem}
 \begin{align}
 \grad^2 u &= 0 & &\text{in } \Omega = (0,L)^2\times (0,H), \\
 u &= 0 & &\text{on the bottom and sides}, \\
 \frac{\partial u}{\partial z} &= g & &\text{on the top $z=H$}.
 \end{align}
 \end{subequations}
-Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the outward-normal derivative on the top.
+Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the outward-normal derivative on the top.  See Figure \ref{fig:laplaceproblem}.
 
-It is well-known that Laplace equation problem \eqref{laplaceproblem} has a unique solution $u$ if $g$ is minimally well-behaved \cite{Elmanetal2014,Evans2010}.  Problem \eqref{laplaceproblem} has a mixture of homogeneous Dirichlet (bottom and sides) and nonhomogeneous Neumann (top) boundary conditions, and the fact that  Dirichlet conditions apply on a positive-measure part of the boundary\footnote{In \eqref{laplaceproblem}, Dirichlet conditions apply on quite a large part of the boundary, in fact, namely 5 of 6 faces!} implies uniqueness.
+\begin{figure}[ht]
+\begin{tikzpicture}[scale=8.0]
+  % axes; x,y are horizontal and z is vertical
+  \draw[->,gray,very thin] (-0.2,0.0) -- (1.2,0.0) node[below,black] {$x,y$};
+  \draw[->,gray,very thin] (0.0,-0.1) -- (0.0,0.4) node[left,black] {$z$};
+  % R = (0,L)^2
+  \node at (-0.04,-0.05) {$0$};
+  \node at (1.0,-0.05) {$L$};
+  \node at (-0.04,0.3) {$H$};
+  \draw[line width=1.0pt] (0.0,0.0) -- (0.0,0.3);
+  \draw[line width=1.0pt] (1.0,0.0) -- (1.0,0.3);
+  \draw[line width=1.0pt] (0.0,0.0) -- (1.0,0.0);
+  \draw[line width=1.0pt] (0.0,0.3) -- (1.0,0.3);
+  % equation and boundary conditions
+  \node at (0.5,0.15) {$\grad^2 u = 0$};
+  \node at (0.5,-0.05) {$u=0$};
+  \node at (0.5,0.4) {$\displaystyle \frac{\partial u}{\partial z} = g$};
+  \node at (-0.1,0.15) {$u=0$};
+  \node at (1.1,0.15) {$u=0$};
+\end{tikzpicture}
+\caption{Laplace equation problem \eqref{eq:laplaceproblem} uniquely defines $u(x,y,z)$ if $g(x,y)$ is a given top-surface Neumann condition.}
+\label{fig:laplaceproblem}
+\end{figure}
 
-Thus it is reasonable to talk about \emph{the} solution $u$ of \eqref{laplaceproblem} for given top-surface Neumann data $g$, and in particular to consider the well-defined map from $g(x,y)$ to the top-surface values of the solution $u(x,y,H)$.  This is a linear \emph{Neumann-to-Dirichlet map},
+It is well-known that Laplace equation problem \eqref{eq:laplaceproblem} has a unique solution $u$ if $g$ is minimally well-behaved \cite{Elmanetal2014,Evans2010}.  The problem has a mixture of homogeneous Dirichlet (bottom and sides) and nonhomogeneous Neumann (top) boundary conditions, and the fact that  Dirichlet conditions apply on a positive-measure part of the boundary\footnote{In \eqref{eq:laplaceproblem}, Dirichlet conditions apply on quite a large part of the boundary, in fact, namely 5 of 6 faces!} implies uniqueness.
+
+Thus it is reasonable to talk about \emph{the} solution $u$ of \eqref{eq:laplaceproblem} for given top-surface Neumann data $g$, and in particular to consider the well-defined map from $g(x,y)$ to the top-surface values of the solution $u(x,y,H)$.  This is a linear \emph{Neumann-to-Dirichlet map},
 \begin{equation}
 N : \, g(x,y) \, \mapsto \, u(x,y,H).  \label{eq:ntod}
 \end{equation}
@@ -194,12 +218,13 @@ FIXME model problem is on 2D domain $R = (0,L)^2$, with $\eps>0$:
 \begin{equation}
 -\eps \grad^2 s + \frac{N s}{H} = f  \label{eq:modelproblem}
 \end{equation}
+See Figure \ref{fig:modelproblem}.
 
 \begin{figure}
 \begin{tikzpicture}[scale=5.0]
   % axes
-  \draw[->,gray,very thin] (-0.2,0.0) -- (1.2,0.0) node[below] {$x$};
-  \draw[->,gray,very thin] (0.0,-0.2) -- (0.0,1.2) node[left] {$y$};
+  \draw[->,gray,very thin] (-0.2,0.0) -- (1.2,0.0) node[below,black] {$x$};
+  \draw[->,gray,very thin] (0.0,-0.2) -- (0.0,1.2) node[left,black] {$y$};
   % R = (0,L)^2
   \node at (-0.04,-0.05) {$0$};
   \node at (1.0,-0.05) {$L$};
@@ -209,14 +234,14 @@ FIXME model problem is on 2D domain $R = (0,L)^2$, with $\eps>0$:
   \draw[line width=1.0pt] (0.0,0.0) -- (1.0,0.0);
   \draw[line width=1.0pt] (0.0,1.0) -- (1.0,1.0);
   % equation and boundary conditions
-  \node at (0.5,0.5) {$-\eps \grad^2 s + \frac{N s}{H} = f$};
+  \node at (0.5,0.5) {$\displaystyle -\eps \grad^2 s + \frac{N s}{H} = f$};
   \node at (0.5,-0.1) {$s=0$};
   \node at (0.5,1.1) {$s=0$};
   \node[rotate=90] at (-0.1,0.5) {$s=0$};
   \node[rotate=-90] at (1.1,0.5) {$s=0$};
 \end{tikzpicture}
+\caption{Model problem \eqref{eq:modelproblem} on $R = (0,L)^2$.}
 \label{fig:modelproblem}
-\caption{2D model equation \eqref{eq:modelproblem} on $R = (0,L)^2$.}
 \end{figure}
 
 FIXME alternative model has ``$N(\grad s)$'' instead, in some form
