@@ -164,16 +164,16 @@ FIXME
 
 Our model problem is a 2D equation with both partial derivatives and integrals, namely equation \eqref{eq:modelproblem} below, but it is created from looking at a notional surface process on the top of a 3D domain.  We start with this 3D problem.
 
-For length $L>0$ and height $H>0$ given, let $\Omega = (0,L)^2\times (0,H)$ be the rectangular-solid in 3D.  On $\Omega$ the coordinates are $x,y,z$ with $0<x,y<L$ and $0<z<H$.  We call the $z=0$ boundary the \emph{bottom} and the $z=H$ boundary the \emph{top}.  The remaining boundary parts are the \emph{sides}.  Let $g(x,y)$ be a given function on the top, i.e.~defined for $0<x,y<L$.  We consider the following 3D Laplace equation problem for the scalar solution $u(x,y,z)$ defined on $\Omega$:
+For length $\ell>0$ and height $h>0$ given, let $\Lambda = (0,\ell)^2\times (0,h)$ be the rectangular-solid in 3D.  On $\Lambda$ the coordinates are $x,y,z$ with $0<x,y<\ell$ and $0<z<h$.  We call the $z=0$ boundary the \emph{bottom} and the $z=h$ boundary the \emph{top}, and the remaining boundary forms the \emph{sides}.  Let $g(x,y)$ be a given function on the top, defined for $0<x,y<\ell$.  We consider the following 3D Laplace equation problem for the scalar solution $u(x,y,z)$ defined on $\Lambda$:
 \begin{subequations}
 \label{eq:laplaceproblem}
 \begin{align}
-\grad^2 u &= 0 & &\text{in } \Omega = (0,L)^2\times (0,H), \\
+\grad^2 u &= 0 & &\text{in } \Lambda = (0,\ell)^2\times (0,h), \\
 u &= 0 & &\text{on the bottom and sides}, \\
-\frac{\partial u}{\partial z} &= g & &\text{on the top $z=H$}.
+\frac{\partial u}{\partial z} &= g & &\text{on the top $z=h$}.
 \end{align}
 \end{subequations}
-Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the outward-normal derivative on the top.  See Figure \ref{fig:laplaceproblem}.
+Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the outward-normal derivative on the top of $\Lambda$.  See Figure \ref{fig:laplaceproblem}.
 
 \begin{figure}[ht]
 \begin{tikzpicture}[scale=8.0]
@@ -182,8 +182,8 @@ Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the o
   \draw[->,gray,very thin] (0.0,-0.1) -- (0.0,0.4) node[left,black] {$z$};
   % R = (0,L)^2
   \node at (-0.04,-0.05) {$0$};
-  \node at (1.0,-0.05) {$L$};
-  \node at (-0.04,0.3) {$H$};
+  \node at (1.0,-0.05) {$\ell$};
+  \node at (-0.04,0.3) {$h$};
   \draw[line width=1.0pt] (0.0,0.0) -- (0.0,0.3);
   \draw[line width=1.0pt] (1.0,0.0) -- (1.0,0.3);
   \draw[line width=1.0pt] (0.0,0.0) -- (1.0,0.0);
@@ -195,28 +195,28 @@ Note that $\frac{\partial u}{\partial n}=\frac{\partial u}{\partial z}$ is the o
   \node at (-0.1,0.15) {$u=0$};
   \node at (1.1,0.15) {$u=0$};
 \end{tikzpicture}
-\caption{Laplace equation problem \eqref{eq:laplaceproblem} uniquely defines $u(x,y,z)$ if $g(x,y)$ is a given top-surface Neumann condition.}
+\caption{3D problem \eqref{eq:laplaceproblem} defines $u(x,y,z)$, for given Neumann condition $g(x,y)$.}
 \label{fig:laplaceproblem}
 \end{figure}
 
-It is well-known that Laplace equation problem \eqref{eq:laplaceproblem} has a unique solution $u$ if $g$ is minimally well-behaved \cite{Elmanetal2014,Evans2010}.  The problem has a mixture of homogeneous Dirichlet (bottom and sides) and nonhomogeneous Neumann (top) boundary conditions, and the fact that  Dirichlet conditions apply on a positive-measure part of the boundary\footnote{In \eqref{eq:laplaceproblem}, Dirichlet conditions apply on quite a large part of the boundary, in fact, namely 5 of 6 faces!} implies uniqueness.
+It is well-known that Laplace equation problem \eqref{eq:laplaceproblem} has a unique solution $u$ if $g$ is minimally well-behaved \cite{Elmanetal2014,Evans2010}.  The problem has a mixture of homogeneous Dirichlet (bottom and sides) and nonhomogeneous Neumann (top) boundary conditions.  The fact that Dirichlet conditions apply on a positive-measure part of the boundary of $\Lambda$ implies uniqueness.  (They apply on a large part of the boundary, namely 5 of 6 faces!)
 
-Thus it is reasonable to talk about \emph{the} solution $u$ of \eqref{eq:laplaceproblem} for given top-surface Neumann data $g$, and in particular to consider the well-defined map from $g(x,y)$ to the top-surface values of the solution $u(x,y,H)$.  This is a linear \emph{Neumann-to-Dirichlet map},
+Thus it is reasonable to talk about \emph{the} solution $u$ of \eqref{eq:laplaceproblem} for given top-surface Neumann data $g$, and in particular to consider the well-defined map from $g$ to the top-surface values, a trace \cite{Evans2010}, of the solution $u$.  Specifically we define a linear, scaled \emph{Neumann-to-Dirichlet map},
 \begin{equation}
-N : \, g(x,y) \, \mapsto \, u(x,y,H).  \label{eq:ntod}
+N_h : \, g(x,y) \, \mapsto \, \frac{1}{h} u(x,y,h).  \label{eq:ntod}
 \end{equation}
-As shown in the Appendix, a separation of variables argument allows us to express this map as an integral against a know \emph{kernel} $K$, namely
+As shown in the Appendix, a separation of variables argument allows us to express this map as an integral against a known \emph{kernel} $K_h$, namely
 \begin{equation}
-(N g)(x,y) = u(x,y,H) = \int_0^L \int_0^L K(x,y;\xi,\eta)\, g(\xi,\eta)\,d\xi\,d\eta  \label{eq:ntodformula}
+(N_h g)(x,y) = u(x,y,H) = \int_0^\ell \int_0^\ell K_h(x,y;\xi,\eta)\, g(\xi,\eta)\,d\xi\,d\eta  \label{eq:ntodformula}
 \end{equation}
 where
 \begin{equation}
-K(x,y;\xi,\eta) = (\text{FIXME: a sum of $\sin() \sinh()$ products; closed form?})  \label{eq:kernelformula}
+K_h(x,y;\xi,\eta) = (\text{FIXME: a sum of $\sin() \sinh()$ products; closed form?})  \label{eq:kernelformula}
 \end{equation}
 
-FIXME model problem is on 2D domain $R = (0,L)^2$, with $\eps>0$:
+FIXME model problem is on 2D domain $\Omega = (0,\ell)^2$, with $\eps>0$:
 \begin{equation}
--\eps \grad^2 s + \frac{N s}{H} = f  \label{eq:modelproblem}
+-\eps \grad^2 s + N_h s = f  \label{eq:modelproblem}
 \end{equation}
 See Figure \ref{fig:modelproblem}.
 
@@ -227,26 +227,26 @@ See Figure \ref{fig:modelproblem}.
   \draw[->,gray,very thin] (0.0,-0.2) -- (0.0,1.2) node[left,black] {$y$};
   % R = (0,L)^2
   \node at (-0.04,-0.05) {$0$};
-  \node at (1.0,-0.05) {$L$};
-  \node at (-0.04,1.0) {$L$};
+  \node at (1.0,-0.05) {$\ell$};
+  \node at (-0.04,1.0) {$\ell$};
   \draw[line width=1.0pt] (0.0,0.0) -- (0.0,1.0);
   \draw[line width=1.0pt] (1.0,0.0) -- (1.0,1.0);
   \draw[line width=1.0pt] (0.0,0.0) -- (1.0,0.0);
   \draw[line width=1.0pt] (0.0,1.0) -- (1.0,1.0);
   % equation and boundary conditions
-  \node at (0.5,0.5) {$\displaystyle -\eps \grad^2 s + \frac{N s}{H} = f$};
+  \node at (0.5,0.5) {$\displaystyle -\eps \grad^2 s + N_h s = f$};
   \node at (0.5,-0.1) {$s=0$};
   \node at (0.5,1.1) {$s=0$};
   \node[rotate=90] at (-0.1,0.5) {$s=0$};
   \node[rotate=-90] at (1.1,0.5) {$s=0$};
 \end{tikzpicture}
-\caption{Model problem \eqref{eq:modelproblem} on $R = (0,L)^2$.}
+\caption{Model problem \eqref{eq:modelproblem} on $\Omega = (0,\ell)^2$.}
 \label{fig:modelproblem}
 \end{figure}
 
-FIXME alternative model has ``$N(\grad s)$'' instead, in some form
+FIXME alternative model has ``$N_h \grad s$'' instead of $N_h s$, in some form?
 
-FIXME observe how $H^{-1} Ns$ behaves as $H\to 0$
+FIXME observe how $N_h s$ behaves as $h\to 0$
 
 FIXME much more to write
 
@@ -254,11 +254,11 @@ FIXME much more to write
 
 FIXME \cite{Briggsetal2000,Bueler2021,Trottenbergetal2001} for multigrid
 
-FIXME need to explore smoothers which can handle the $N$ operator
+FIXME need to explore smoothers which can handle the $N_h$ integral operator
 
 \section{Discussion and Conclusion} \label{sec:conclusion}
 
-FIXME \cite{Girouardetal2022} show that the Neumann-to-Dirichlet map $\mathcal{N}:\frac{\partial u}{\partial n}|_{\partial} \mapsto u|_{\partial}$ along the \emph{entire} boundary of a 3D domain $\Omega \subset \RR^3$ is very close to $|\grad_{\partial}|^{-1}$ where $|\grad_{\partial}| = \sqrt{-\grad_{\partial}^2}$ is the square root of the positive boundary Laplacian $-\grad_{\partial}^2$; they are identical only when $\Omega$ is a 3D sphere, which is not true here
+FIXME \cite{Girouardetal2022} show that the Neumann-to-Dirichlet map $\mathcal{N}:\frac{\partial u}{\partial n}|_{\partial} \mapsto u|_{\partial}$ along the \emph{entire} boundary of a 3D domain $\Lambda \subset \RR^3$ is very close to $|\grad_{\partial}|^{-1}$ where $|\grad_{\partial}| = \sqrt{-\grad_{\partial}^2}$ is the square root of the positive boundary Laplacian $-\grad_{\partial}^2$; they are identical only when $\Omega$ is a 3D sphere, which is not true here
 
 \bibliography{model}
 \bibliographystyle{siam}
