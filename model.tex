@@ -287,33 +287,33 @@ FIXME \cite{Girouardetal2022} show that the Neumann-to-Dirichlet map $\mathcal{N
 \appendix
 \section{Integral operator kernel for problem \eqref{eq:laplaceproblem}}
 
-In this section we give an explicit formula for the solution of the 3D Laplace equation problem \eqref{eq:laplaceproblem}, the problem illustrated in Figure \ref{fig:laplaceproblem}.  The explicit formula \eqref{eq:app:laplaceproblemsoln} below is an infinite series coming from a classical separation-of-variables type solution.  (A closed, non-series form may exist but it is not known to the author.)  The goal is then to derive kernel formula \eqref{eq:kernelformula}, the kernel of the Neumann-to-Dirichlet operator $N_h$, in a verifiable manner.
+In this Appendix we give an explicit formula for the solution of the 3D Laplace equation problem \eqref{eq:laplaceproblem}, as illustrated in Figure \ref{fig:laplaceproblem}.  Formula \eqref{eq:app:laplaceproblemsoln} below is a Fourier sine series coming from a classical separation-of-variables type solution.  (A closed, non-series form may exist but it is not known to the author.)  The goal here is to derive kernel formula \eqref{eq:kernelformula}, the kernel of the Neumann-to-Dirichlet operator $N_h$, in a verifiable manner.
 
 Consider the orthogonal set $\left\{\,\sin(j\pi x/\ell)\,\right\}_{j=1}^\infty$, a basis of $L^2(0,\ell)$.  Recall the following formulas:
     $$\int_0^\ell \sin(j\pi x/\ell) \sin(k\pi x/\ell)\,dx = \begin{cases} 0, & j \ne k \\ \ell/2, & j=k \end{cases}.$$
-Fourier sine series follow; if $f \in L^2(0,\ell)$ then
-    $$f(x) = \sum_{j=1}^\infty c_j \sin(j\pi x/\ell) \quad \iff \quad c_j = \frac{2}{\ell} \int_0^\ell f(x) \sin(j\pi x/\ell)\,dx.$$
+Fourier sine series follow.  In terms of orthonormal functions, if $f \in L^2(0,\ell)$ then
+    $$f(x) = \sum_{j=1}^\infty c_j\, \sqrt{\frac{2}{\ell}} \sin(j\pi x/\ell) \quad \iff \quad c_j = \sqrt{\frac{2}{\ell}} \int_0^\ell f(x) \sin(j\pi x/\ell)\,dx.$$
 
 Now consider the 2D domain $\Omega = (0,\ell)^2$ and define
-    $$\varphi_{jk}(x,y) = \frac{2}{\ell} \sin(j\pi x/\ell) \sin(k\pi x/\ell).$$
-For $j,k \in \ZZ$ these functions form an orthonormal (ON) basis in $L^2(\Omega)$, and furthermore $\varphi_{jk}(0,y)=\varphi_{jk}(\ell,y)=\varphi_{jk}(x,0)=\varphi_{jk}(x,\ell)=0$, so these functions are zero on $\partial\Omega$.  We also see that these are eigenfunctions of the Laplacian:
+    $$\varphi_{jk}(x,y) = \frac{2}{\ell} \sin(j\pi x/\ell) \sin(k\pi y/\ell).$$
+For $j,k \in \ZZ$ these functions form an orthonormal (ON) basis in $L^2(\Omega)$, and furthermore $\varphi_{jk}(0,y)=\varphi_{jk}(\ell,y)=\varphi_{jk}(x,0)=\varphi_{jk}(x,\ell)=0$; they are zero on $\partial\Omega$.  We also see they are eigenfunctions of the Laplacian:
     $$\left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\right) \varphi_{jk}(x,y) = - \frac{\pi^2 (j^2+k^2)}{\ell^2}\, \varphi_{jk}(x,y).$$
-Of course, Fourier series formulas also follow; if $g\in L^2(\Omega)$ then
+Again Fourier series formulas follow; if $g\in L^2(\Omega)$ then
     $$g(x,y) = \sum_{j=1}^\infty \sum_{k=1}^\infty c_{jk} \varphi_{jk}(x,y) \quad \iff \quad c_{jk} = \int_0^\ell \int_0^\ell g(x,y) \varphi_{jk}(x,y)\,dx\,dy.$$
-The completeness of the set $\left\{\varphi_{jk}(x,y)\right\}_{j,k=1}^\infty$ can be expressed by this formula for the Dirac delta function for any $x,y \in \Omega$:
+The completeness of the set $\left\{\varphi_{jk}(x,y)\right\}_{j,k=1}^\infty$ is expressed by the Dirac delta function:
 \begin{equation}
     \delta_{x,y}(\xi,\eta) = \sum_{j=1}^\infty \sum_{k=1}^\infty \varphi_{jk}(x,y) \, \varphi_{jk}(\xi,\eta). \label{eq:app:diracdelta}
 \end{equation}
 
-On the other hand, it is easily checked that for each pair $j,k \in \ZZ$,
+On the other hand, it is easily checked that for each pair $j,k \in \ZZ$ the modal function
     $$\sinh(\sqrt{j^2+k^2}\, \pi z/\ell) \, \varphi_{jk}(x,y)$$
-solves equations \eqref{eq:laplaceproblemA} and \eqref{eq:laplaceproblemB}, that is, this function solves the homogeneous parts of the 3D Laplace equation problem.  By linearity this sum therefore solves equations \eqref{eq:laplaceproblemA} and \eqref{eq:laplaceproblemB}
+solves equations \eqref{eq:laplaceproblemA} and \eqref{eq:laplaceproblemB}, that is, it solves the homogeneous parts of that problem.  By linearity this sum also solves equations \eqref{eq:laplaceproblemA} and \eqref{eq:laplaceproblemB}:
     $$u(x,y,z) = \sum_{j=1}^\infty \sum_{k=1}^\infty a_{jk} \sinh(\sqrt{j^2+k^2}\, \pi z/\ell)\, \varphi_{jk}(x,y),$$
-assuming the coefficients $a_{jk}$ are appropriately summable.  We then seek to satisfy condition \eqref{eq:laplaceproblemC} for a given $g(x,y)$.  Note
+assuming the coefficients $a_{jk}$ are appropriately summable.  We next seek to satisfy condition \eqref{eq:laplaceproblemC} for a given $g(x,y)$.  Note
     $$\frac{\partial u}{\partial z}(x,y,h) = \sum_{j=1}^\infty \sum_{k=1}^\infty a_{jk}\,\frac{\sqrt{j^2+k^2}\, \pi}{\ell} \cosh(\sqrt{j^2+k^2}\, \pi h/\ell) \, \varphi_{jk}(x,y)$$
 It follows from uniqueness of coefficients, i.e.~orthogonality, that
     $$g(x,y) = \frac{\partial u}{\partial z}(x,y,h) \qquad \iff \qquad a_{jk} = \frac{\ell}{\pi \sqrt{j^2+k^2}\, \cosh(\sqrt{j^2+k^2}\, \pi h/\ell)} \,c_{jk}$$
-where $c_{jk}$ are computed from $g(x,y)$ by the integral formula above.  We may write the following Fourier sine series solution of problem \ref{eq:laplaceproblem}:
+where $c_{jk}$ are computed from $g(x,y)$ by the integral formula above.  Thus we may write a Fourier sine series solution of problem \eqref{eq:laplaceproblem}:
 \begin{align}
 u(x,y,z) &= \sum_{j=1}^\infty \sum_{k=1}^\infty \frac{\ell}{\pi \sqrt{j^2+k^2}\, \cosh(\sqrt{j^2+k^2}\, \pi h/\ell)} \,c_{jk} \, \sinh(\sqrt{j^2+k^2}\, \pi z/\ell) \,\varphi_{jk}(x,y) \notag \\
          &= \sum_{j=1}^\infty \sum_{k=1}^\infty \frac{\ell}{\pi \sqrt{j^2+k^2}\, \cosh(\sqrt{j^2+k^2}\, \pi h/\ell)} \,\left(\int_0^\ell \int_0^\ell g(\xi,\eta) \varphi_{jk}(\xi,\eta)\,d\xi\,d\eta\right) \notag \\
@@ -325,18 +325,18 @@ A formal simplification occurs if we evaluate at the surface and divide by $h$:
 \frac{1}{h} u(x,y,h) = \sum_{j=1}^\infty \sum_{k=1}^\infty \Phi\left(\frac{\pi \sqrt{j^2+k^2}\,h}{\ell}\right) \,\left(\int_0^\ell \int_0^\ell g(\xi,\eta) \varphi_{jk}(\xi,\eta)\,d\xi\,d\eta\right) \varphi_{jk}(x,y),
 \end{equation*}
 where
-    $$\Phi(w) = \frac{\tanh(w)}{w},$$
-sometimes called the ``$\operatorname{tanhc}$'' function,\footnote{See \href{https://en.wikipedia.org/wiki/Tanhc_function}{\texttt{en.wikipedia.org/wiki/Tanhc\_function}}.} is smooth on the real line.  Note $\Phi(0)=1$, $\Phi'(0)=0$, and the decay rate $\Phi(w) = O(w^{-1})$ as $w \to +\infty$.
+    $$\Phi(w) = \frac{\tanh(w)}{w}.$$
+The function $\Phi$, sometimes called the ``$\operatorname{tanhc}$'' function,\footnote{See \href{https://en.wikipedia.org/wiki/Tanhc_function}{\texttt{en.wikipedia.org/wiki/Tanhc\_function}}.} is smooth on the real line and it satisfies $\Phi(0)=1$ and $\Phi'(0)=0$.  It has decay rate $\Phi(w) = O(w^{-1})$ as $w \to +\infty$.
 
-Recalling that $(N_h g)(x,y) = h^{-1} u(x,y,h)$, by changing order of integration we have the following integral formula for the scaled, top-side Neumann-to-Dirichlet $N_h$:
+Recalling that $(N_h g)(x,y) = h^{-1} u(x,y,h)$, by changing order of integration we have the following integral formula for the scaled, top-surface Neumann-to-Dirichlet $N_h$:
     $$(N_h g)(x,y) = \int_0^\ell \int_0^\ell K_h(x,y;\xi,\eta)\, g(\xi,\eta)\,d\xi\,d\eta$$
 where
 \begin{equation}
 K_h(x,y;\xi,\eta) = \sum_{j=1}^\infty \sum_{k=1}^\infty \Phi\left(\frac{\pi \sqrt{j^2+k^2}\,h}{\ell}\right) \, \varphi_{jk}(x,y) \, \varphi_{jk}(\xi,\eta). \label{eq:app:kernelformula}
 \end{equation}
-This justifies \eqref{eq:kernelformula}.
+This justifies kernel formula \eqref{eq:kernelformula} in the main text.
 
-The decay of $\Phi(w)$ above, namely $\Phi(w) = O(w^{-1}) \to 0$ as $w\to+\infty$, implies that the eigenvalues of $N_h$ are $O((j^2+k^2)^{-1/2})$ as $j,k \to+\infty$.  Such decay is expected because the eigenvalues of the inverse of $N_h$, the Dirichlet-to-Neumann map, are known to go to infinity at the same rate as the square-root of the Laplacian \cite{Girouardetal2022}.
+The decay of $\Phi(w)$ mentioned above, namely $\Phi(w) = O(w^{-1})$, implies that the eigenvalues of $N_h$ are $O((j^2+k^2)^{-1/2})$ as $j,k \to+\infty$.  Such decay is expected because the eigenvalues of the inverse of $N_h$, the Dirichlet-to-Neumann map, are known to go to infinity at the same rate as the square-root of the Laplacian \cite{Girouardetal2022}.  Observe that $N_h$ is a symmetric, compact operator \cite{Evans2010} on $L^2(\Omega)$.
 
-As the aspect ratio $h/\ell$ goes to zero, observe that more and more modes $j,k$ correspond to small inputs $w=\pi \sqrt{j^2+k^2}\,h/\ell \ll 1$ to $\Phi(w)$ in formula \eqref{eq:app:kernelformula}.  But $\Phi(w)\approx 1$ for such modes since $\Phi(0)=1$ and $\Phi'(0)=0$.  Comparing the Dirac delta function \eqref{eq:app:diracdelta} to \eqref{eq:app:kernelformula}, we see that $K_h(x,y;\cdot,\cdot) \approx \delta_{x,y}(\cdot,\cdot)$ when considering well-behaved $g$, i.e.~with a Fourier sine series dominated by low frequencies.  In fact, a standard Hilbert space argument will show that $N_h \to I$ as $h\to 0$, i.e.~strongly in the sense that $N_h g \to g$ in $L^2(\Omega)$.
+As the aspect ratio $h/\ell$ goes to zero, observe that more and more modes $j,k$ correspond to small inputs $w=\pi \sqrt{j^2+k^2}\,h/\ell \ll 1$ going into $\Phi(w)$ in formula \eqref{eq:app:kernelformula}.  But $\Phi(w)\approx 1$ for such modes, since $\Phi(0)=1$ and $\Phi'(0)=0$.  Comparing the Dirac delta function \eqref{eq:app:diracdelta} to \eqref{eq:app:kernelformula}, we see that in the small aspect limit $K_h(x,y;\cdot,\cdot) \approx \delta_{x,y}(\cdot,\cdot)$.  (This requires well-behaved, smooth $g$ with a spectrum dominated by low frequencies.)  In fact, a standard Hilbert space argument shows that $N_h \to I$ as $h\to 0$, in the strong sense that $N_h g \to g$ in $L^2(\Omega)$.
 \end{document}
